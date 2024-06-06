@@ -1,0 +1,21 @@
+services:
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_USER=kitsune
+      - POSTGRES_PASSWORD=kitsune
+      - POSTGRES_DB=kitsune
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+  redis:
+    image: redis:7
+    volumes:
+      - redisdata:/data
+  kitsune:
+    image: kitsune
+    environment:
+      DATABASE_URL: postgres://kitsune:kitsune@db/kitsune
+
+volumes:
+  dbdata:
+  redisdata:
