@@ -7,6 +7,7 @@ default-language = "{{ getenv "LANGUAGE_DETECTION_DEFAULT_LANGUAGE" "en" }}"
 
 [mrf]
 module-dir = "{{ getenv "MRF_MODULE_DIR" "./mrf-modules" }}"
+allocation-strategy = "{{ getenv "MRF_ALLOCATION_STRATEGY" "pooling" }}"
 
 [mrf.artifact-cache]
 path = "{{ getenv "MRF_ARTIFACT_CACHE_PATH" "./mrf-cache" }}"
@@ -16,7 +17,6 @@ path = "{{ getenv "MRF_ARTIFACT_CACHE_PATH" "./mrf-cache" }}"
 [mrf.storage]
 type = "{{ getenv "MRF_STORAGE_TYPE" "fs" }}"
 path = "{{ getenv "MRF_STORAGE_PATH" "./mrf-storage" }}"
-allocation-strategy = "{{ getenv "MRF_ALLOCATION_STRATEGY" "pooling" }}"
 
 [database]
 url = "{{ getenv "DATABASE_URL" "postgres://localhost/kitsune" }}"
