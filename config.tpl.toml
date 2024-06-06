@@ -6,7 +6,7 @@ backend = "{{ getenv "LANGUAGE_DETECTION_BACKEND" "whatlang" }}"
 default-language = "{{ getenv "LANGUAGE_DETECTION_DEFAULT_LANGUAGE" "en" }}"
 
 [mrf]
-module-dir = "{{ getenv "MRF_MODULE_DIR" "mrf-modules" }}"
+module-dir = "{{ getenv "MRF_MODULE_DIR" "./mrf-modules" }}"
 
 [mrf.artifact-cache]
 path = "{{ getenv "MRF_ARTIFACT_CACHE_PATH" "./mrf-cache" }}"
