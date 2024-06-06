@@ -1,7 +1,7 @@
 FROM node:20 as step1
 RUN mkdir /kitsune && \
     cd /kitsune && \
-    curl https://github.com/kitsune-soc/kitsune/archive/refs/heads/main.zip -Lo main.zip && \
+    curl https://github.com/kitsune-soc/kitsune/archive/refs/heads/allocation-strategy-config.zip -Lo main.zip && \
     unzip main.zip && \
     cd kitsune-main/kitsune-fe && \
     yarn install && \
