@@ -1,0 +1,66 @@
+[cache]
+type = "{{ getenv "CACHE_TYPE" "in-memory" }}"
+
+[language-detection]
+backend = "{{ getenv "LANGUAGE_DETECTION_BACKEND" "whatlang" }}"
+default-language = "{{ getenv "LANGUAGE_DETECTION_DEFAULT_LANGUAGE" "en" }}"
+
+[mrf]
+module-dir = "{{ getenv "MRF_MODULE_DIR" "mrf-modules" }}"
+
+[mrf.artifact-cache]
+path = {{ getenv "MRF_ARTIFACT_CACHE_PATH" "./mrf-cache" }}
+
+[mrf.module-config]
+
+[mrf.storage]
+type = {{ getenv "MRF_STORAGE_TYPE" "fs" }}
+path = {{ getenv "MRF_STORAGE_PATH" "./mrf-storage" }}
+
+[database]
+url = "{{ getenv "DATABASE_URL" "postgres://localhost/kitsune" }}"
+max-connections = {{ getenv "DATBASE_MAX_CONNECTIONS" "20" }}
+
+[instance]
+allow-non-ascii-usernames = {{ getenv "INSTANCE_ALLOW_NON_ASCII_USERNAMES" "false" }}
+name = "{{ getenv "INSTANCE_NAME" "Kitsune" }}"
+description = "{{ getenv "INSTANCE_DESCRIPTION" "https://www.youtube.com/watch?v=6lnnPnr_0SU" }}"
+character-limit = {{ getenv "INSTANCE_CHARACTER_LIMIT" "5000" }}
+registrations-open = {{ getenv "INSTANCE_REGISTRATIONS_OPEN" "true" }}
+
+[instance.federation-filter]
+type = "{{ getenv "INSTANCE_FEDERATION_FILTER_TYPE" "deny" }}"
+domains = [
+  {{- range (getenv "INSTANCE_FEDERATION_FILTER_DOMAINS" "" | strings.Split ",") -}}
+  {{- if ne . "" -}}
+  "{{ . }}",
+  {{- end -}}
+  {{- end -}}
+]
+
+[job-queue]
+redis-url = "{{ getenv "JOB_QUEUE_REDIS_URL" "redis://localhost" }}"
+num-workers = {{ getenv "JOB_QUEUE_NUM_WORKERS" "20" }}
+
+[messaging]
+type = "{{ getenv "MESSAGING_TYPE" "in-process" }}"
+
+[server]
+frontend-dir = "{{ getenv "SERVER_FRONTEND_DIR" "./kitsune-fe/dist" }}"
+max-upload-size = "{{ getenv "SERVER_MAX_UPLOAD_SIZE" "5MiB" }}"
+media-proxy-enabled = {{ getenv "SERVER_MEDIA_PROXY_ENABLED" "false" }}
+port = {{ getenv "SERVER_PORT" "5000" }}
+request-timeout-secs = {{ getenv "SERVER_REQUEST_TIMEOUT_SECS" "60" }}
+deny-brave-browsers = {{ getenv "SERVER_DENY_BRAVE_BROWSERS" "true" }}
+
+[search]
+type = "{{ getenv "SEARCH_TYPE" "sql" }}"
+
+[storage]
+type = "{{ getenv "STORAGE_TYPE" "fs" }}"
+upload-dir = "{{ getenv "STORAGE_UPLOAD_DIR" "./uploads" }}"
+
+[url]
+scheme = "{{ getenv "URL_SCHEME" "https" }}"
+domain = "{{ getenv "URL_DOMAIN" "kitsune.example.com" }}"
+
