@@ -16,6 +16,7 @@ path = "{{ getenv "MRF_ARTIFACT_CACHE_PATH" "./mrf-cache" }}"
 [mrf.storage]
 type = "{{ getenv "MRF_STORAGE_TYPE" "fs" }}"
 path = "{{ getenv "MRF_STORAGE_PATH" "./mrf-storage" }}"
+allocation-strategy = "{{ getenv "MRF_ALLOCATION_STRATEGY" "pooling" }}"
 
 [database]
 url = "{{ getenv "DATABASE_URL" "postgres://localhost/kitsune" }}"
