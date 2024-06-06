@@ -12,9 +12,14 @@ services:
     volumes:
       - redisdata:/data
   kitsune:
-    image: kitsune
+    build: .
     environment:
       DATABASE_URL: postgres://kitsune:kitsune@db/kitsune
+      JOB_QUEUE_REDIS_URL: redis://redis
+      URL_SCHEME: http
+      URL_DOMAIN: localhost:3000
+    ports:
+      - 5000:5000
 
 volumes:
   dbdata:

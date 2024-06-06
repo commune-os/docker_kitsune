@@ -46,7 +46,7 @@ num-workers = {{ getenv "JOB_QUEUE_NUM_WORKERS" "20" }}
 type = "{{ getenv "MESSAGING_TYPE" "in-process" }}"
 
 [server]
-frontend-dir = "{{ getenv "SERVER_FRONTEND_DIR" "./kitsune-fe/dist" }}"
+frontend-dir = "{{ getenv "SERVER_FRONTEND_DIR" "./kitsune-fe" }}"
 max-upload-size = "{{ getenv "SERVER_MAX_UPLOAD_SIZE" "5MiB" }}"
 media-proxy-enabled = {{ getenv "SERVER_MEDIA_PROXY_ENABLED" "false" }}
 port = {{ getenv "SERVER_PORT" "5000" }}

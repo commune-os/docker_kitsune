@@ -7,4 +7,4 @@ echo "Config:"
 /cat /config.toml
 
 echo "Starting Kitsune"
-/kitsune -c config.toml
+exec /kitsune -c config.toml

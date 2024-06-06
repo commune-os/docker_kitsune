@@ -19,6 +19,7 @@ RUN --mount=type=cache,target=/home/rust/src/target \
     mv /home/rust/src/target/x86_64-unknown-linux-musl/release/kitsune-job-runner /kitsune-job-runner
 
 FROM scratch
+COPY --from=step1 /kitsune/kitsune-main/kitsune-fe/dist /kitsune-fe
 COPY --from=step2 /kitsune /kitsune-
 COPY --from=step2 /kitsune /kitsune
 COPY --from=step2 /kitsune-cli /kitsune-cli
@@ -26,6 +27,7 @@ COPY --from=step2 /kitsune-job-runner /kitsune-job-runner
 COPY --from=alpine:latest /lib/ld-musl-x86_64.so.1 /lib/ld-musl-x86_64.so.1
 COPY --from=alpine:latest /bin/ash /ash
 COPY --from=alpine:latest /bin/cat /cat
+COPY --from=alpine:latest /etc/ssl /etc/ssl
 COPY --from=hairyhenderson/gomplate:stable /gomplate /gomplate
 COPY config.tpl.toml /config.tpl.toml
 COPY entrypoint.sh /entrypoint.sh
