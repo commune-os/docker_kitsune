@@ -3,12 +3,12 @@ RUN mkdir /kitsune && \
     cd /kitsune && \
     curl https://github.com/kitsune-soc/kitsune/archive/refs/heads/allocation-strategy-config.zip -Lo main.zip && \
     unzip main.zip && \
-    cd kitsune-main/kitsune-fe && \
+    cd kitsune-allocation-strategy-config/kitsune-fe && \
     yarn install && \
     yarn build
 
 FROM messense/rust-musl-cross:x86_64-musl as step2
-COPY --from=step1 /kitsune/kitsune-main /home/rust/src
+COPY --from=step1 /kitsune/kitsune-allocation-strategy-config /home/rust/src
 WORKDIR /home/rust/src
 RUN --mount=type=cache,target=/home/rust/src/target \
     --mount=type=cache,target=/root/.cargo/registry \
@@ -19,7 +19,7 @@ RUN --mount=type=cache,target=/home/rust/src/target \
     mv /home/rust/src/target/x86_64-unknown-linux-musl/release/kitsune-job-runner /kitsune-job-runner
 
 FROM scratch
-COPY --from=step1 /kitsune/kitsune-main/kitsune-fe/dist /kitsune-fe
+COPY --from=step1 /kitsune/kitsune-allocation-strategy-config/kitsune-fe/dist /kitsune-fe
 COPY --from=step2 /kitsune /kitsune-
 COPY --from=step2 /kitsune /kitsune
 COPY --from=step2 /kitsune-cli /kitsune-cli
