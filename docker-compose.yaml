@@ -17,7 +17,10 @@ services:
       DATABASE_URL: postgres://kitsune:kitsune@db/kitsune
       JOB_QUEUE_REDIS_URL: redis://redis
       URL_SCHEME: http
-      URL_DOMAIN: localhost:3000
+      URL_DOMAIN: localhost:5000
+      # SERVER_OIDC_SERVER_URL: https://weird.one/auth/v1
+      # SERVER_OIDC_CLIENT_ID: https://git.weird.one/zicklag/localhost-oidc-config/raw/branch/main/kitsune.json
+      # SERVER_OIDC_CLIENT_SECRET: unused
     ports:
       - 5000:5000
 

@@ -38,6 +38,16 @@ domains = [
   {{- end -}}
 ]
 
+{{ if getenv "SERVER_OIDC_SERVER_URL" }}
+[server.oidc]
+server-url = "{{ .Env.SERVER_OIDC_SERVER_URL }}"
+client-id = "{{ .Env.SERVER_OIDC_CLIENT_ID }}"
+client-secret = "{{ .Env.SERVER_OIDC_CLIENT_SECRET }}"
+
+[server.oidc.store]
+type = "{{ getenv "SERVER_OIDC_STORE_TYPE" "in-memory" }}"
+{{ end }}
+
 [job-queue]
 redis-url = "{{ getenv "JOB_QUEUE_REDIS_URL" "redis://localhost" }}"
 num-workers = {{ getenv "JOB_QUEUE_NUM_WORKERS" "20" }}
